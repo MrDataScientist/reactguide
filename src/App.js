@@ -1,22 +1,22 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
 import Person from './Person/Person';
 
-class App extends Component {
+const app = props => {
 
-    state = {
+    const [personsState, setPersonState] = useState({
         persons: [
             {name: 'Zouheir', age: 29},
             {name: 'Tarik', age: 30},
             {name: 'Nakdi', age: 35}
         ],
         otherState: 'some other value'
-    }
+    });
 
-    switchNameHandler = () => {
-      //  console.log('was clicked!');
-        this.setState({
+    const switchNameHandler = () => {
+        //  console.log('was clicked!');
+        setPersonState({
             persons: [
                 {name: 'Maximilian', age: 29},
                 {name: 'Tarik', age: 30},
@@ -25,23 +25,33 @@ class App extends Component {
         });
     }
 
-    render() {
-        return (
-            <div className="App">
-                <h1> I'm a React App ! </h1>
-                <p>This is really working</p>
-                <button onClick={this.switchNameHandler}>Switch Name</button>
 
-                <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-                <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-                <Person name={this.state.persons[2].name} age={this.state.persons[2].age}> Children: mia san mia</Person>
+   // useState();
 
-            </div>
-        );
+    return (
+        <div className="App">
+            <h1> I'm a React App ! </h1>
+            <p>This is really working</p>
+            <button onClick={switchNameHandler}>Switch Name</button>
 
-        //   return React.createElement('div',null, React.createElement('h1', {className: 'App'},'does it work now?'));
+            <Person
+                name={personsState.persons[0].name}
+                age={personsState.persons[0].age}
+            />
+            <Person
+                name={personsState.persons[1].name}
+                age={personsState.persons[1].age}
+            />
+            <Person
+                name={personsState.persons[2].name}
+                age={personsState.persons[2].age}
+            >
+                Children: mia san mia
+            </Person>
 
-    }
+        </div>
+    );
+
 }
 
-export default App;
+export default app;
